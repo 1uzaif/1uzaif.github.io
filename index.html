@@ -19,6 +19,9 @@
             --teal-dim: rgba(0, 191, 165, 0.15);
         }
         html { scroll-behavior: smooth; }
+        /* GPU layer hints for smooth animation */
+        .ambient-light, .cloud-row { will-change: transform; }
+        #knowledge-modal { will-change: scroll-position; }
 
         /* ── Grass texture background ── */
         body {
@@ -109,8 +112,8 @@
         .ray:nth-child(2){left:50%;height:70%;top:15%;animation-delay:-2.5s}
         .ray:nth-child(3){left:85%;height:90%;top:5%;animation-delay:-5s}
         @keyframes rayPulse { 0%,100%{opacity:.2;transform:scaleY(1)} 50%{opacity:.6;transform:scaleY(1.01)} }
-        nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.25rem 0; transition: all .4s; }
-        nav.scrolled { background: rgba(2,10,6,0.96); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.25rem 0; transition: background .4s, border-color .4s; }
+        nav.scrolled { background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,200,83,0.15); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; letter-spacing: 2px; text-shadow: 0 0 30px rgba(0,200,83,0.6); color: var(--green-bright); }
         .logo span { color: var(--text-dim); font-weight: 400; }
@@ -130,7 +133,7 @@
         .cta-btn .arrow { transition: transform .3s; }
         .cta-btn:hover .arrow { transform: translateX(5px); }
         .profile-container { text-align: center; position: relative; padding: 2rem 0; }
-        .profile-monogram { font-family: 'Syne', sans-serif; font-size: 5rem; font-weight: 800; line-height: 1; letter-spacing: -3px; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ffffff 0%, var(--green-bright) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 40px rgba(0,200,83,0.4)); display: inline-block; }
+        .profile-monogram { font-family: 'Syne', sans-serif; font-size: 5rem; font-weight: 800; line-height: 1; letter-spacing: -3px; margin-bottom: 1.5rem; background: linear-gradient(160deg, #ffffff 0%, #c8d0d8 12%, #f0f4f8 25%, #8a9aaa 38%, #dce4ec 50%, #6b7d8e 62%, #e8eef4 75%, #9aaabb 88%, #ccd4de 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.7)) drop-shadow(0 0 20px rgba(180,210,230,0.18)) drop-shadow(0 -1px 0px rgba(255,255,255,0.5)); display: inline-block; }
         .profile-name { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 0.25rem; }
         .profile-role { font-size: 0.7rem; color: var(--green-bright); margin-bottom: 2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 3px; }
         .profile-stats { display: flex; justify-content: center; gap: 3rem; margin-bottom: 2.5rem; }
@@ -216,8 +219,21 @@
             .hero-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
             .hero .desc { margin: 0 auto 2.5rem; }
             .profile-container { max-width: 400px; margin: 0 auto; }
-            .hero-content { order: 2; }
+            .hero-content { order: 2; text-align: left; }
             .profile-container { order: 1; }
+            .hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); letter-spacing: -1.5px; }
+            #role-word-wrap { min-height: 1.2em !important; }
+            .exp-card { grid-template-columns: 1fr; gap: 1.5rem; }
+            .exp-meta { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 1.5rem; }
+            .projects-grid { grid-template-columns: 1fr !important; }
+            .nav-links { display: none; }
+            .section { padding: 5rem 1.5rem; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            .edu-card { flex-direction: column; align-items: flex-start; gap: .8rem; }
+            .edu-meta { text-align: left; }
+            .nav-container { padding: 0 1.5rem; }
+            #top-btn { display: none; }
+        }
             .exp-card { grid-template-columns: 1fr; gap: 1.5rem; }
             .exp-meta { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 1.5rem; }
             .projects-grid { grid-template-columns: 1fr; }
@@ -300,7 +316,7 @@
                             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             LinkedIn
                         </a>
-                        <a href="#" class="info-item" target="_blank">
+                        <a href="https://github.com/1uzaif" class="info-item" target="_blank">
                             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                             GitHub
                         </a>
@@ -313,7 +329,13 @@
             </div>
             <div class="hero-content">
                 <div class="hero-label">// immediate availability · dublin, ireland</div>
-                <h1><span id="role-word" style="color:var(--green-bright);display:inline-block;">DevOps</span><br>Engineer</h1>
+                <h1 style="margin-bottom:1.5rem;">
+                    <span id="role-word-wrap" style="display:block;min-height:2.2em;overflow:hidden;">
+                        <span id="role-line1" style="display:block;color:var(--green-bright);">DevOps</span>
+                        <span id="role-line2" style="display:block;color:var(--green-bright);"></span>
+                    </span>
+                    <span style="display:block;">Engineer</span>
+                </h1>
                 <p class="subtitle" style="font-size:0.78rem;opacity:0.55;margin-bottom:0.4rem;"><strong style="font-weight:500;">MSc Cybersecurity</strong> · National College of Ireland<br>BSc Information Technology · University of Mumbai</p>
                 <p class="desc" style="font-size:0.78rem;opacity:0.45;max-width:420px;margin-bottom:2.5rem;line-height:1.8;">Results-driven Cloud &amp; DevOps Engineer with 3+ years building, securing, and optimising scalable cloud and hybrid infrastructure. IaC, CI/CD, containerisation, monitoring, and DevSecOps across AWS and Azure.</p>
                 <a href="#projects" class="cta-btn">
@@ -325,21 +347,42 @@
 
     <!-- TECH CLOUD -->
     <div id="tech-cloud" style="
-        padding: 3.5rem 0;
+        padding: 4.5rem 0;
         border-top: 1px solid var(--border);
         border-bottom: 1px solid var(--border);
         overflow: hidden;
         position: relative;
         z-index: 1;
-        background: rgba(0,0,0,0.15);
+        background: rgba(0,0,0,0.18);
+        backdrop-filter: blur(2px);
     ">
-        <!-- fade edges -->
-        <div style="position:absolute;top:0;left:0;bottom:0;width:140px;background:linear-gradient(90deg,rgba(3,13,5,0.95),transparent);z-index:2;pointer-events:none;"></div>
-        <div style="position:absolute;top:0;right:0;bottom:0;width:140px;background:linear-gradient(90deg,transparent,rgba(3,13,5,0.95));z-index:2;pointer-events:none;"></div>
+        <!-- section label -->
+        <div style="text-align:center;margin-bottom:2.5rem;position:relative;z-index:3;pointer-events:none;">
+            <div style="font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;color:rgba(0,200,83,0.5);margin-bottom:0.5rem;">// tech stack</div>
+            <div style="font-size:0.75rem;color:rgba(200,230,210,0.3);font-family:'DM Mono',monospace;">hover a technology to see where &amp; how long</div>
+        </div>
 
-        <div class="cloud-row" id="cr0" style="display:flex;gap:1.2rem;margin-bottom:1.1rem;width:max-content;"></div>
-        <div class="cloud-row" id="cr1" style="display:flex;gap:1.2rem;margin-bottom:1.1rem;width:max-content;"></div>
-        <div class="cloud-row" id="cr2" style="display:flex;gap:1.2rem;width:max-content;"></div>
+        <!-- fade edges -->
+        <div style="position:absolute;top:0;left:0;bottom:0;width:160px;background:linear-gradient(90deg,rgba(3,13,5,0.98),transparent);z-index:2;pointer-events:none;"></div>
+        <div style="position:absolute;top:0;right:0;bottom:0;width:160px;background:linear-gradient(90deg,transparent,rgba(3,13,5,0.98));z-index:2;pointer-events:none;"></div>
+
+        <!-- Row 1 — fastest -->
+        <div style="margin-bottom:1.4rem;overflow:hidden;">
+            <div class="cloud-row" id="cr0" style="display:flex;gap:1.4rem;width:max-content;"></div>
+        </div>
+        <!-- Row 2 — medium, slightly offset vertically -->
+        <div style="margin-bottom:1.4rem;overflow:hidden;padding-left:40px;">
+            <div class="cloud-row" id="cr1" style="display:flex;gap:1.4rem;width:max-content;"></div>
+        </div>
+        <!-- Row 3 — slowest -->
+        <div style="overflow:hidden;">
+            <div class="cloud-row" id="cr2" style="display:flex;gap:1.4rem;width:max-content;"></div>
+        </div>
+
+        <!-- cursor hint -->
+        <div style="text-align:center;margin-top:2rem;font-size:0.62rem;letter-spacing:2px;color:rgba(0,200,83,0.25);pointer-events:none;position:relative;z-index:3;">
+            ← move cursor left to slow · right to speed up →
+        </div>
     </div>
 
     <!-- Tech tooltip (reused for cloud) -->
@@ -365,51 +408,79 @@
         <div class="exp-grid">
             <div class="exp-card">
                 <div class="exp-meta">
-                    <div class="exp-company">Wintel Systems</div>
-                    <div class="exp-role">Cloud Operations Analyst</div>
-                    <div class="exp-date">Jun 2022 – Jul 2023 · India</div>
+                    <div class="exp-company">Digitrix</div>
+                    <div class="exp-role">Software Engineer Intern</div>
+                    <div class="exp-date">Aug 2019 – Dec 2019</div>
                 </div>
                 <ul class="exp-list">
-                    <li>Designed, deployed, and maintained highly available cloud &amp; hybrid infrastructure on AWS, Azure, and VMware.</li>
-                    <li>Reduced critical vulnerabilities by <strong style="color:var(--green-bright)">60%</strong> through automated scanning (Nessus, OpenVAS) and security hardening (IAM, MFA, encryption, security groups).</li>
-                    <li>Improved compliance by <strong style="color:var(--green-bright)">35%</strong> using AWS Config, automated checks, and drift detection.</li>
-                    <li>Built automation scripts in Python, Bash, and PowerShell for backups, recovery, and security remediation.</li>
-                    <li>Implemented monitoring with Splunk SIEM, Microsoft Defender for Cloud, CloudWatch, and IDS/IPS.</li>
-                    <li>Contributed to CI/CD pipelines and Terraform deployments; managed incidents via ServiceNow.</li>
-                    <li>Conducted security training that reduced phishing incidents by <strong style="color:var(--green-bright)">80%</strong>.</li>
+                    <li>Assisted in CI/CD pipeline management, system configuration, and deployment workflow automation.</li>
+                    <li>Contributed to Infrastructure-as-Code practices and supported release management across environments.</li>
+                    <li>Supported cloud infrastructure setup, configuration, and monitoring tasks in a live production environment.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-meta">
+                    <div class="exp-company">Digitrix</div>
+                    <div class="exp-role">Junior Software Engineer</div>
+                    <div class="exp-date">Jan 2020 – Aug 2020</div>
+                </div>
+                <ul class="exp-list">
+                    <li>Took on expanded engineering responsibilities across cloud provisioning, system automation, and deployment pipelines.</li>
+                    <li>Maintained cloud resource availability and contributed to operational documentation and process improvements.</li>
+                    <li>Collaborated on infrastructure-as-code initiatives and supported cross-team release cycles.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-meta">
+                    <div class="exp-company">Krazyfox</div>
+                    <div class="exp-role">Freelance Software Engineer</div>
+                    <div class="exp-date">Oct 2020 – Dec 2022</div>
+                </div>
+                <ul class="exp-list">
+                    <li>Delivered software engineering and cloud solutions across multiple client projects in a freelance capacity.</li>
+                    <li>Implemented secure storage solutions to prevent unauthorised access and data breaches on production assets.</li>
+                    <li>Managed confidential digital assets securely throughout production and delivery processes.</li>
                 </ul>
             </div>
             <div class="exp-card">
                 <div class="exp-meta">
                     <div class="exp-company">Wintel Systems</div>
-                    <div class="exp-role">IT Technical Consultant</div>
-                    <div class="exp-date">Mar 2021 – Jun 2022 · India</div>
+                    <div class="exp-role">Cloud Operations Analyst</div>
+                    <div class="exp-date">Mar 2021 – Jun 2022</div>
                 </div>
                 <ul class="exp-list">
                     <li>Delivered secure infrastructure using AWS (EC2, IAM, RDS), Windows Server, Active Directory, VPN, and Cisco technologies.</li>
+                    <li>Conducted vulnerability assessments with Nessus and OpenVAS; monitored network traffic with Splunk in real-time.</li>
+                    <li>Implemented MFA, data encryption, and firewall configurations to harden client environments against threats.</li>
                     <li>Improved SLAs through scripting, automation, and ServiceNow implementation across client environments.</li>
                 </ul>
             </div>
             <div class="exp-card">
                 <div class="exp-meta">
-                    <div class="exp-company">Digitrix</div>
-                    <div class="exp-role">Cloud Intern</div>
-                    <div class="exp-date">Jan 2020 – Jun 2020</div>
+                    <div class="exp-company">Wintel Systems</div>
+                    <div class="exp-role">Site Reliability Engineer</div>
+                    <div class="exp-date">Jun 2022 – Jul 2023</div>
                 </div>
                 <ul class="exp-list">
-                    <li>Supported cloud infrastructure setup, configuration, and monitoring tasks in a live production environment.</li>
-                    <li>Assisted in maintaining cloud resource availability and contributing to operational documentation.</li>
+                    <li>Designed and deployed highly available cloud &amp; hybrid infrastructure on AWS, Azure, and VMware.</li>
+                    <li>Reduced critical vulnerabilities by <strong style="color:var(--green-bright)">60%</strong> through automated scanning (Nessus, OpenVAS) and security hardening (IAM, MFA, encryption).</li>
+                    <li>Improved compliance by <strong style="color:var(--green-bright)">35%</strong> using AWS Config, automated checks, and drift detection.</li>
+                    <li>Built automation scripts in Python, Go, and Bash for backups, recovery, and security remediation; applied design patterns and SOLID principles to produce maintainable, reusable tooling.</li>
+                    <li>Implemented monitoring with Splunk SIEM, Microsoft Defender for Cloud, CloudWatch, and IDS/IPS.</li>
+                    <li>Conducted security training that reduced phishing incidents by <strong style="color:var(--green-bright)">80%</strong>.</li>
                 </ul>
             </div>
             <div class="exp-card">
                 <div class="exp-meta">
-                    <div class="exp-company">Digitrix</div>
-                    <div class="exp-role">DevOps Intern</div>
-                    <div class="exp-date">Jun 2019 – Dec 2019</div>
+                    <div class="exp-company">Self-Employed</div>
+                    <div class="exp-role">Freelance Cloud Engineer</div>
+                    <div class="exp-date">Aug 2023 – Present</div>
                 </div>
                 <ul class="exp-list">
-                    <li>Assisted in CI/CD pipeline management, system configuration, and deployment workflow automation.</li>
-                    <li>Contributed to Infrastructure-as-Code practices and supported release management across environments.</li>
+                    <li>Providing cloud engineering, DevOps, and security consultancy services to clients independently.</li>
+                    <li>Writing production code across Python, Go, and Java; applying design patterns (Factory, Observer, Strategy) and clean code principles to deliver robust, scalable solutions.</li>
+                    <li>Designing and deploying scalable cloud infrastructure across AWS and Azure for various client engagements.</li>
+                    <li>Completed MSc in Cybersecurity at National College of Ireland alongside ongoing freelance work.</li>
                 </ul>
             </div>
         </div>
@@ -455,14 +526,8 @@
             <p class="section-desc">DevOps, AI, blockchain, IoT, and full-stack applications</p>
         </div>
 
-        <!-- Project grid — JS controls which page of 5 is visible -->
-        <div id="projects-grid" class="projects-grid"></div>
-
-        <!-- Pagination dots + More Projects button -->
-        <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:2.5rem;flex-wrap:wrap;">
-            <div id="proj-dots" style="display:flex;gap:8px;align-items:center;"></div>
-            <button id="more-projects-btn" style="padding:12px 28px;background:transparent;border:1px solid rgba(0,200,83,0.35);border-radius:100px;color:var(--green-bright);font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:1px;cursor:none;transition:all .3s;">More Projects →</button>
-        </div>
+        <!-- 5 project cards + 1 flip button in one grid -->
+        <div id="projects-grid" class="projects-grid" style="grid-template-columns: repeat(3, 1fr);"></div>
     </section>
 
     <!-- Tech tooltip (shared, positioned by JS) -->
@@ -479,7 +544,7 @@
             <div class="skill-card"><div class="skill-label">Cloud &amp; DevOps</div><div class="skill-list">AWS (EC2, ECS, Lambda, API Gateway, SageMaker, RDS, DynamoDB, S3, CloudWatch, Config) · Azure · VMware · Docker · Terraform · CI/CD · Jenkins · Ansible · Git</div></div>
             <div class="skill-card"><div class="skill-label">Monitoring &amp; Reliability</div><div class="skill-list">CloudWatch · Splunk SIEM · Microsoft Defender for Cloud · IDS/IPS · ServiceNow · High Availability</div></div>
             <div class="skill-card"><div class="skill-label">Security &amp; Compliance</div><div class="skill-list">Nessus · OpenVAS · Nmap · Burp Suite · IAM · MFA · Encryption · Vulnerability Management · DevSecOps</div></div>
-            <div class="skill-card"><div class="skill-label">Programming &amp; Frameworks</div><div class="skill-list">Python · Bash · PowerShell · Solidity · Django · FastAPI · SQL · JavaScript</div></div>
+            <div class="skill-card"><div class="skill-label">Programming &amp; Frameworks</div><div class="skill-list">Python · Go · Java · Bash · PowerShell · JavaScript · SQL · Django · FastAPI · Solidity<br><span style="color:var(--green-bright);opacity:0.7;font-size:0.76rem;">Design Patterns · SOLID · OOP · Clean Code Principles</span></div></div>
             <div class="skill-card"><div class="skill-label">AI &amp; ML Stack</div><div class="skill-list">LLM Integration · RAG Pipelines · Whisper (Transcription) · CLIP / ResNet · AWS SageMaker · Hugging Face</div></div>
             <div class="skill-card"><div class="skill-label">Blockchain &amp; Web3</div><div class="skill-list">Ethereum · Solidity · Smart Contracts · Web3.js · MetaMask · Truffle · IPFS</div></div>
         </div>
@@ -650,9 +715,9 @@
                 <svg width="18" height="18" fill="#00e676" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 <div><div class="contact-card-label">LINKEDIN</div>Uzaif Shaikh</div>
             </a>
-            <a href="https://github.com/your-github" target="_blank" class="contact-card">
+            <a href="https://github.com/1uzaif" target="_blank" class="contact-card">
                 <svg width="18" height="18" fill="#00e676" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                <div><div class="contact-card-label">GITHUB</div>your-github</div>
+                <div><div class="contact-card-label">GITHUB</div>github.com/1uzaif</div>
             </a>
             <a href="https://tryhackme.com/p/your-profile" target="_blank" class="contact-card">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#00e676"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.042 1.135 5.824 3 7.938V24l4.5-2.25A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.5 17.5l-4-2 .5-3-2-2 3-.5 1.5-3 1.5 3 3 .5-2 2 .5 3-3-1.5z"/></svg>
@@ -661,6 +726,29 @@
         </div>
         <div class="contact-reveal" style="margin-top:3.5rem;height:1px;background:linear-gradient(90deg,var(--green-bright),transparent);transition-delay:.5s;transform-origin:left;"></div>
     </section>
+
+    <!-- KNOWLEDGE MAP BUTTON — above footer -->
+    <div style="text-align:center;padding:3rem 1rem 2rem;position:relative;z-index:1;border-top:1px solid var(--border);">
+        <div style="font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:rgba(0,200,83,0.4);margin-bottom:1rem;font-family:'DM Mono',monospace;">// knowledge architecture</div>
+        <button id="kmap-open-btn" style="
+            padding:14px 40px;
+            background:rgba(0,200,83,0.07);
+            border:1.5px solid rgba(0,200,83,0.3);
+            border-radius:100px;
+            color:var(--green-bright);
+            font-family:'Syne',sans-serif;
+            font-weight:700;
+            font-size:0.88rem;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            cursor:none;
+            transition:all .3s;
+            box-shadow:0 0 30px rgba(0,200,83,0.08);
+        " onmouseenter="this.style.background='rgba(0,200,83,0.14)';this.style.borderColor='rgba(0,200,83,0.6)';this.style.boxShadow='0 0 40px rgba(0,200,83,0.2)'" onmouseleave="this.style.background='rgba(0,200,83,0.07)';this.style.borderColor='rgba(0,200,83,0.3)';this.style.boxShadow='0 0 30px rgba(0,200,83,0.08)'">
+            ⬡ &nbsp; View Full Knowledge Map
+        </button>
+        <div style="font-size:0.7rem;color:rgba(200,230,210,0.25);margin-top:0.8rem;font-family:'DM Mono',monospace;">everything I know · how it connects · where it leads</div>
+    </div>
 
     <footer>
         <p>© 2025 Uzaif Shaikh · DevOps | SRE | Cloud Security · Dublin, Ireland</p>
@@ -675,43 +763,80 @@
         .project-card { border-radius: 20px; }
         .skill-card { border-radius: 18px; }
 
-        /* ── Role word fade animation ── */
-        @keyframes roleFadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes roleFadeOut { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(-8px); } }
-        #role-word.fade-out { animation: roleFadeOut .35s ease forwards; }
-        #role-word.fade-in { animation: roleFadeIn .35s ease forwards; }
+        /* ── Profile monogram shine-in ── */
+        @keyframes metalShine {
+            0%   { filter: drop-shadow(0 2px 6px rgba(0,0,0,0.7)) drop-shadow(0 0 20px rgba(180,210,230,0.18)) drop-shadow(0 -1px 0px rgba(255,255,255,0.5)); }
+            35%  { filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)) drop-shadow(0 0 40px rgba(220,240,255,0.7)) drop-shadow(0 -1px 2px rgba(255,255,255,1)); }
+            60%  { filter: drop-shadow(0 2px 10px rgba(0,0,0,0.4)) drop-shadow(0 0 55px rgba(200,230,255,0.9)) drop-shadow(0 -2px 4px rgba(255,255,255,1)); }
+            100% { filter: drop-shadow(0 2px 6px rgba(0,0,0,0.7)) drop-shadow(0 0 20px rgba(180,210,230,0.18)) drop-shadow(0 -1px 0px rgba(255,255,255,0.5)); }
+        }
+        .profile-monogram { animation: metalShine 1.4s ease-out forwards; }
+        /* role lines */
+        #role-line1, #role-line2 { line-height: 1.05; }
+        #role-word-wrap { transition: min-height .3s ease; }
 
         /* ── Pagination dots ── */
         .proj-dot { width:8px; height:8px; border-radius:50%; border:1px solid rgba(0,200,83,0.5); background:transparent; cursor:none; transition:all .3s; }
         .proj-dot.active { background:var(--green-bright); border-color:var(--green-bright); box-shadow:0 0 8px var(--green-bright); }
 
-        /* ── More projects button hover ── */
+        /* More projects button hover ── */
         #more-projects-btn:hover { background:rgba(0,200,83,0.08); border-color:rgba(0,200,83,0.6); box-shadow:0 0 20px rgba(0,200,83,0.15); }
 
         /* ── Tech tooltip ── */
         #tech-tooltip strong { color:var(--green-bright); display:block; margin-bottom:4px; font-size:0.75rem; }
+
+        /* ── Cursor: single dot, no animation ── */
+        * { cursor: none !important; }
+        #dot {
+            position: fixed; pointer-events: none; z-index: 999999;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #00e676;
+            box-shadow: 0 0 6px rgba(0,230,118,0.7);
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+        }
     </style>
 
     <script>
-        /* ── Role word cycling ── */
-        const roles = ['DevOps', 'Cloud', 'Cybersecurity', 'Site Reliability'];
+        /* ── Role word cycling — fixed height, no layout shift ── */
+        // Each entry: [line1, line2 (empty string = single line)]
+        const roles = [
+            ['DevOps', ''],
+            ['Cloud', ''],
+            ['Cyber', 'Security'],
+            ['Site Reliability', ''],
+        ];
         let roleIdx = 0;
-        const roleEl = document.getElementById('role-word');
+        const line1El = document.getElementById('role-line1');
+        const line2El = document.getElementById('role-line2');
+
         function cycleRole() {
-            if (!roleEl) return;
-            roleEl.classList.add('fade-out');
+            if (!line1El) return;
+            // fade out
+            line1El.style.transition = 'opacity .3s ease, transform .3s ease';
+            line2El.style.transition = 'opacity .3s ease, transform .3s ease';
+            line1El.style.opacity = '0'; line1El.style.transform = 'translateY(-6px)';
+            line2El.style.opacity = '0'; line2El.style.transform = 'translateY(-6px)';
             setTimeout(() => {
                 roleIdx = (roleIdx + 1) % roles.length;
-                roleEl.textContent = roles[roleIdx];
-                roleEl.classList.remove('fade-out');
-                roleEl.classList.add('fade-in');
-                setTimeout(() => roleEl.classList.remove('fade-in'), 350);
-            }, 350);
+                const [l1, l2] = roles[roleIdx];
+                line1El.textContent = l1;
+                line2El.textContent = l2;
+                // Set wrap height: if two lines, let it expand; if one, keep compact
+                const wrap = document.getElementById('role-word-wrap');
+                wrap.style.minHeight = l2 ? '2.2em' : '1.1em';
+                line1El.style.transform = 'translateY(6px)';
+                line2El.style.transform = 'translateY(6px)';
+                requestAnimationFrame(() => {
+                    line1El.style.opacity = '1'; line1El.style.transform = 'translateY(0)';
+                    line2El.style.opacity = '1'; line2El.style.transform = 'translateY(0)';
+                });
+            }, 310);
         }
         setInterval(cycleRole, 2600);
 
         /* ── Project data (10 projects, 5 per page) ── */
-        const GITHUB = 'https://github.com/your-github';
+        const GITHUB = 'https://github.com/1uzaif';
         const allProjects = [
             {
                 title: 'PopCulture Debater – AI Agent',
@@ -727,7 +852,7 @@
                 },
                 desc: 'Conversational AI that debates users on pop culture using RAG and LLMs. Containerised with Docker, deployed on AWS ECS with CloudWatch monitoring and a CI/CD pipeline.',
                 metrics: [['RAG','Powered'],['ECS','Deployed'],['CI/CD','Pipeline']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><rect x="30" y="30" width="160" height="50" rx="10" fill="rgba(0,200,83,0.08)" stroke="#00c853" stroke-width="1"/><text x="110" y="60" fill="#00e676" font-size="9" text-anchor="middle" font-family="monospace">User: "Best film ever?"</text><rect x="210" y="95" width="160" height="50" rx="10" fill="rgba(0,200,83,0.15)" stroke="#00e676" stroke-width="1"/><text x="290" y="115" fill="#69ff97" font-size="9" text-anchor="middle" font-family="monospace">AI: "Fight me on that."</text><circle r="3" fill="#00e676" opacity=".8"><animateMotion path="M110 80 L290 95" dur="1.5s" repeatCount="indefinite"/></circle><text x="200" y="160" fill="#00c853" font-size="9" text-anchor="middle" font-family="monospace" letter-spacing="2px">CONVERSATIONAL AI DEBATER</text>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><rect x="30" y="28" width="165" height="52" rx="12" fill="rgba(0,191,165,0.12)" stroke="#00bfa5" stroke-width="1.2"/><text x="112" y="58" fill="#4dd0c4" font-size="9" text-anchor="middle" font-family="monospace">User: "Best film ever?"</text><rect x="205" y="90" width="165" height="52" rx="12" fill="rgba(255,183,77,0.12)" stroke="#ffb74d" stroke-width="1.2"/><text x="287" y="116" fill="#ffd54f" font-size="9" text-anchor="middle" font-family="monospace">AI: "Fight me on that."</text><circle r="4" fill="#ffb74d"><animateMotion path="M112 80 L287 90" dur="1.4s" repeatCount="indefinite"/></circle><text x="200" y="162" fill="rgba(0,191,165,0.5)" font-size="8" text-anchor="middle" font-family="monospace" letter-spacing="2px">RAG · LLM · AWS ECS</text>`
             },
             {
                 title: 'LyricLens – AI Music Explorer',
@@ -742,7 +867,7 @@
                 },
                 desc: 'Serverless tool that fetches real lyrics, provides AI-powered analysis, suggests similar songs, and generates new verses in the artist\'s style with audio preview.',
                 metrics: [['Serverless','Architecture'],['LLM','Analysis'],['Live','Preview']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><g transform="translate(200,85)" stroke="#00c853" stroke-width="2" fill="none"><path d="M-80 0 Q-65 -35 -50 0 Q-35 35 -20 0 Q-5 -30 10 0 Q25 30 40 0 Q55 -25 70 0 Q85 25 100 0"/><animate attributeName="opacity" values="1;.3;1" dur="1.8s" repeatCount="indefinite"/></g><text x="200" y="40" fill="#00e676" font-size="11" text-anchor="middle" font-family="monospace">🎵 LyricLens</text><rect x="30" y="130" width="80" height="20" rx="4" fill="rgba(0,200,83,0.1)" stroke="#00c853" stroke-width=".8"/><text x="70" y="144" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">Lambda</text><rect x="160" y="130" width="80" height="20" rx="4" fill="rgba(0,200,83,0.1)" stroke="#00c853" stroke-width=".8"/><text x="200" y="144" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">DynamoDB</text><rect x="290" y="130" width="80" height="20" rx="4" fill="rgba(0,200,83,0.1)" stroke="#00c853" stroke-width=".8"/><text x="330" y="144" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">S3 + LLM</text>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><g transform="translate(200,82)" stroke="#b39ddb" stroke-width="2" fill="none"><path d="M-80 0 Q-65 -38 -50 0 Q-35 38 -20 0 Q-5 -32 10 0 Q25 32 40 0 Q55 -28 70 0 Q85 28 100 0"/><animate attributeName="opacity" values="1;.25;1" dur="1.8s" repeatCount="indefinite"/></g><text x="200" y="38" fill="#ce93d8" font-size="11" text-anchor="middle" font-family="monospace">🎵 LyricLens</text><rect x="28" y="128" width="84" height="20" rx="4" fill="rgba(179,157,219,0.12)" stroke="#b39ddb" stroke-width=".8"/><text x="70" y="142" fill="#b39ddb" font-size="7" text-anchor="middle" font-family="monospace">Lambda</text><rect x="158" y="128" width="84" height="20" rx="4" fill="rgba(0,191,165,0.1)" stroke="#00bfa5" stroke-width=".8"/><text x="200" y="142" fill="#4dd0c4" font-size="7" text-anchor="middle" font-family="monospace">DynamoDB</text><rect x="288" y="128" width="84" height="20" rx="4" fill="rgba(255,183,77,0.1)" stroke="#ffb74d" stroke-width=".8"/><text x="330" y="142" fill="#ffd54f" font-size="7" text-anchor="middle" font-family="monospace">S3 + LLM</text>`
             },
             {
                 title: 'StyleMatch – AI Fashion Search',
@@ -757,7 +882,7 @@
                 },
                 desc: 'Computer vision app that identifies clothing items from photos and compares brands, prices, and sustainability info. Deployed on SageMaker with auto-scaling.',
                 metrics: [['CV','Model'],['Auto','Scaling'],['SageMaker','Deployed']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><rect x="40" y="30" width="80" height="100" rx="8" fill="rgba(0,200,83,0.06)" stroke="#00c853" stroke-width="1"/><text x="80" y="75" fill="#00c853" font-size="20" text-anchor="middle">👗</text><text x="80" y="115" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">UPLOAD</text><line x1="120" y1="80" x2="160" y2="80" stroke="#00e676" stroke-width="1.5" stroke-dasharray="4,3"/><rect x="160" y="55" width="80" height="50" rx="6" fill="rgba(0,200,83,0.15)" stroke="#00e676" stroke-width="1.5"/><text x="200" y="78" fill="#00e676" font-size="8" text-anchor="middle" font-family="monospace">CLIP/ResNet</text><line x1="240" y1="80" x2="280" y2="80" stroke="#00e676" stroke-width="1.5" stroke-dasharray="4,3"/><rect x="280" y="40" width="80" height="100" rx="8" fill="rgba(0,200,83,0.06)" stroke="#00c853" stroke-width="1"/><text x="320" y="70" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">Brand A $49</text><text x="320" y="85" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">Brand B $62</text><text x="320" y="100" fill="#69ff97" font-size="7" text-anchor="middle" font-family="monospace">Best Match ✓</text>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><rect x="38" y="28" width="84" height="104" rx="8" fill="rgba(0,191,165,0.07)" stroke="#00bfa5" stroke-width="1"/><text x="80" y="74" fill="#4dd0c4" font-size="20" text-anchor="middle">👗</text><text x="80" y="116" fill="#00bfa5" font-size="7" text-anchor="middle" font-family="monospace">UPLOAD</text><line x1="122" y1="80" x2="160" y2="80" stroke="#b39ddb" stroke-width="1.5" stroke-dasharray="4,3"/><rect x="160" y="54" width="80" height="52" rx="6" fill="rgba(179,157,219,0.12)" stroke="#b39ddb" stroke-width="1.5"/><text x="200" y="76" fill="#ce93d8" font-size="8" text-anchor="middle" font-family="monospace">CLIP</text><text x="200" y="90" fill="#ce93d8" font-size="8" text-anchor="middle" font-family="monospace">ResNet</text><line x1="240" y1="80" x2="278" y2="80" stroke="#ffb74d" stroke-width="1.5" stroke-dasharray="4,3"/><rect x="278" y="28" width="84" height="104" rx="8" fill="rgba(255,183,77,0.07)" stroke="#ffb74d" stroke-width="1"/><text x="320" y="68" fill="rgba(255,213,79,0.6)" font-size="7" text-anchor="middle" font-family="monospace">Brand A $49</text><text x="320" y="84" fill="rgba(255,213,79,0.6)" font-size="7" text-anchor="middle" font-family="monospace">Brand B $62</text><text x="320" y="100" fill="#ffd54f" font-size="7" text-anchor="middle" font-family="monospace">Best Match ✓</text>`
             },
             {
                 title: 'Anti-Piracy via QR & Blockchain',
@@ -772,7 +897,7 @@
                 },
                 desc: 'Blockchain-based system assigning unique QR codes to physical media with tamper-proof Ethereum ownership records and verifiable provenance at every step.',
                 metrics: [['Unique','Per Item'],['100%','Tamper-Proof'],['On-Chain','Ownership']],
-                svg: `<defs><filter id="gGlow"><feGaussianBlur stdDeviation="4"/><feComposite operator="over" in="SourceGraphic"/></filter></defs><rect width="400" height="180" fill="#020a06"/><g fill="none" stroke="#00c853" stroke-width="1.5" filter="url(#gGlow)"><rect x="30" y="75" width="60" height="30" rx="6"/><line x1="90" y1="90" x2="130" y2="90"/><rect x="130" y="75" width="60" height="30" rx="6"/><line x1="190" y1="90" x2="230" y2="90"/><rect x="230" y="75" width="60" height="30" rx="6"/><line x1="290" y1="90" x2="330" y2="90"/><rect x="330" y="75" width="40" height="30" rx="6" stroke="#00e676"/></g><text x="60" y="94" fill="#00c853" font-size="8" text-anchor="middle" font-family="monospace">QR#001</text><text x="160" y="94" fill="#00c853" font-size="8" text-anchor="middle" font-family="monospace">QR#002</text><text x="260" y="94" fill="#00c853" font-size="8" text-anchor="middle" font-family="monospace">QR#003</text><text x="350" y="94" fill="#00e676" font-size="7" text-anchor="middle" font-family="monospace">NEW</text><circle r="4" fill="#00e676" filter="url(#gGlow)"><animateMotion path="M90 90 L330 90" dur="2s" repeatCount="indefinite"/></circle><text x="200" y="145" fill="#00c853" font-size="10" text-anchor="middle" font-family="monospace" letter-spacing="2px">TAMPER-PROOF LEDGER</text>`
+                svg: `<defs><filter id="gGlow"><feGaussianBlur stdDeviation="3"/><feComposite operator="over" in="SourceGraphic"/></filter></defs><rect width="400" height="180" fill="#020a06"/><g fill="none" stroke="#ffb74d" stroke-width="1.5" filter="url(#gGlow)"><rect x="30" y="74" width="60" height="32" rx="6"/><line x1="90" y1="90" x2="130" y2="90"/><rect x="130" y="74" width="60" height="32" rx="6"/><line x1="190" y1="90" x2="230" y2="90"/><rect x="230" y="74" width="60" height="32" rx="6"/><line x1="290" y1="90" x2="330" y2="90"/><rect x="330" y="74" width="40" height="32" rx="6" stroke="#4dd0c4"/></g><text x="60" y="94" fill="#ffd54f" font-size="7" text-anchor="middle" font-family="monospace">QR#001</text><text x="160" y="94" fill="#ffd54f" font-size="7" text-anchor="middle" font-family="monospace">QR#002</text><text x="260" y="94" fill="#ffd54f" font-size="7" text-anchor="middle" font-family="monospace">QR#003</text><text x="350" y="94" fill="#4dd0c4" font-size="7" text-anchor="middle" font-family="monospace">NEW</text><circle r="4" fill="#4dd0c4" filter="url(#gGlow)"><animateMotion path="M90 90 L330 90" dur="2s" repeatCount="indefinite"/></circle><text x="200" y="146" fill="rgba(255,183,77,0.45)" font-size="9" text-anchor="middle" font-family="monospace" letter-spacing="2px">TAMPER-PROOF LEDGER</text>`
             },
             {
                 title: 'D-Voting System (Ethereum DApp)',
@@ -787,7 +912,7 @@
                 },
                 desc: 'Fully decentralised voting DApp on Ethereum using smart contracts for secure, transparent elections with real-time results and no single point of failure.',
                 metrics: [['On-Chain','Votes'],['Zero','Downtime'],['Live','Results']],
-                svg: `<defs><filter id="vGlow"><feGaussianBlur stdDeviation="3"/><feComposite operator="over" in="SourceGraphic"/></filter></defs><rect width="400" height="180" fill="#020a06"/><rect x="60" y="50" width="40" height="80" rx="4" fill="rgba(0,200,83,0.15)" stroke="#00c853" stroke-width="1"/><rect x="60" y="90" width="40" height="40" rx="4" fill="#00c853" opacity=".7"/><rect x="140" y="50" width="40" height="80" rx="4" fill="rgba(0,200,83,0.15)" stroke="#00c853" stroke-width="1"/><rect x="140" y="70" width="40" height="60" rx="4" fill="#00c853" opacity=".5"/><rect x="220" y="50" width="40" height="80" rx="4" fill="rgba(0,200,83,0.15)" stroke="#00c853" stroke-width="1"/><rect x="220" y="55" width="40" height="75" rx="4" fill="#00c853" opacity=".9"/><text x="80" y="148" fill="#00c853" font-size="8" text-anchor="middle" font-family="monospace">A</text><text x="160" y="148" fill="#00c853" font-size="8" text-anchor="middle" font-family="monospace">B</text><text x="240" y="148" fill="#00e676" font-size="8" text-anchor="middle" font-family="monospace">C ✓</text><circle r="3" fill="#00e676" filter="url(#vGlow)"><animateMotion path="M220 90 L330 90" dur="1.5s" repeatCount="indefinite"/></circle><text x="200" y="170" fill="#00c853" font-size="9" text-anchor="middle" font-family="monospace" letter-spacing="2px">DECENTRALISED · TRANSPARENT</text>`
+                svg: `<defs><filter id="vGlow"><feGaussianBlur stdDeviation="3"/><feComposite operator="over" in="SourceGraphic"/></filter></defs><rect width="400" height="180" fill="#020a06"/><rect x="60" y="50" width="40" height="80" rx="4" fill="rgba(0,191,165,0.1)" stroke="#00bfa5" stroke-width="1"/><rect x="60" y="90" width="40" height="40" rx="4" fill="#00bfa5" opacity=".7"/><rect x="140" y="50" width="40" height="80" rx="4" fill="rgba(179,157,219,0.1)" stroke="#b39ddb" stroke-width="1"/><rect x="140" y="70" width="40" height="60" rx="4" fill="#b39ddb" opacity=".6"/><rect x="220" y="50" width="40" height="80" rx="4" fill="rgba(255,183,77,0.1)" stroke="#ffb74d" stroke-width="1"/><rect x="220" y="54" width="40" height="76" rx="4" fill="#ffb74d" opacity=".85"/><text x="80" y="148" fill="#4dd0c4" font-size="8" text-anchor="middle" font-family="monospace">A</text><text x="160" y="148" fill="#ce93d8" font-size="8" text-anchor="middle" font-family="monospace">B</text><text x="240" y="148" fill="#ffd54f" font-size="8" text-anchor="middle" font-family="monospace">C ✓</text><circle r="3" fill="#ffd54f" filter="url(#vGlow)"><animateMotion path="M220 90 L330 90" dur="1.5s" repeatCount="indefinite"/></circle><text x="200" y="170" fill="rgba(179,157,219,0.4)" font-size="8" text-anchor="middle" font-family="monospace" letter-spacing="2px">DECENTRALISED · TRANSPARENT</text>`
             },
             {
                 title: 'EchoJournal – AI Voice Journal',
@@ -802,7 +927,7 @@
                 },
                 desc: 'Voice-first journaling app: speak a note, Whisper transcribes it, an LLM summarises and detects mood, then generates a beautifully formatted entry with themes.',
                 metrics: [['Whisper','Transcription'],['Mood','Detection'],['Cloud','Monitored']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><circle cx="200" cy="80" r="30" fill="rgba(0,200,83,0.08)" stroke="#00c853" stroke-width="1.5"/><circle cx="200" cy="80" r="30" fill="none" stroke="#00e676" stroke-width="1" opacity=".5"><animate attributeName="r" values="30;42;30" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;0;.5" dur="2s" repeatCount="indefinite"/></circle><text x="200" y="86" fill="#00e676" font-size="18" text-anchor="middle">🎙</text><text x="80" y="140" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">Whisper</text><text x="200" y="140" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">LLM</text><text x="320" y="140" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">Journal</text><line x1="110" y1="135" x2="160" y2="135" stroke="#00e676" stroke-width="1" stroke-dasharray="3,3"/><line x1="240" y1="135" x2="290" y2="135" stroke="#00e676" stroke-width="1" stroke-dasharray="3,3"/>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><circle cx="200" cy="78" r="32" fill="rgba(179,157,219,0.08)" stroke="#b39ddb" stroke-width="1.5"/><circle cx="200" cy="78" r="32" fill="none" stroke="#ce93d8" stroke-width="1" opacity=".4"><animate attributeName="r" values="32;46;32" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".4;0;.4" dur="2s" repeatCount="indefinite"/></circle><text x="200" y="86" fill="#ce93d8" font-size="18" text-anchor="middle">🎙</text><text x="80" y="140" fill="#4dd0c4" font-size="7" text-anchor="middle" font-family="monospace">Whisper</text><text x="200" y="140" fill="#b39ddb" font-size="7" text-anchor="middle" font-family="monospace">LLM</text><text x="320" y="140" fill="#ffd54f" font-size="7" text-anchor="middle" font-family="monospace">Journal</text><line x1="112" y1="135" x2="162" y2="135" stroke="#4dd0c4" stroke-width="1" stroke-dasharray="3,3"/><line x1="238" y1="135" x2="288" y2="135" stroke="#ffb74d" stroke-width="1" stroke-dasharray="3,3"/>`
             },
             {
                 title: 'MJ Universe – Digital Archive',
@@ -817,7 +942,7 @@
                 },
                 desc: 'Comprehensive MJ digital archive with discography, timelines, AI chatbot, and real-time interest analytics tracking Google Trends and social mentions.',
                 metrics: [['Lambda','Serverless'],['AI','Chatbot'],['Live','Analytics']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><text x="200" y="60" fill="#00e676" font-size="28" text-anchor="middle">🕺</text><rect x="30" y="80" width="80" height="22" rx="4" fill="rgba(0,200,83,0.1)" stroke="#00c853" stroke-width=".8"/><text x="70" y="95" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">API Gateway</text><rect x="160" y="80" width="80" height="22" rx="4" fill="rgba(0,200,83,0.1)" stroke="#00c853" stroke-width=".8"/><text x="200" y="95" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">AI Chatbot</text><rect x="290" y="80" width="80" height="22" rx="4" fill="rgba(0,200,83,0.1)" stroke="#00c853" stroke-width=".8"/><text x="330" y="95" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">Trend Monitor</text><line x1="110" y1="91" x2="160" y2="91" stroke="#00e676" stroke-width="1" stroke-dasharray="3,3"/><line x1="240" y1="91" x2="290" y2="91" stroke="#00e676" stroke-width="1" stroke-dasharray="3,3"/>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><text x="200" y="58" fill="#ffd54f" font-size="26" text-anchor="middle">🕺</text><rect x="28" y="78" width="84" height="24" rx="4" fill="rgba(0,191,165,0.1)" stroke="#00bfa5" stroke-width=".8"/><text x="70" y="94" fill="#4dd0c4" font-size="7" text-anchor="middle" font-family="monospace">API Gateway</text><rect x="158" y="78" width="84" height="24" rx="4" fill="rgba(179,157,219,0.1)" stroke="#b39ddb" stroke-width=".8"/><text x="200" y="94" fill="#ce93d8" font-size="7" text-anchor="middle" font-family="monospace">AI Chatbot</text><rect x="288" y="78" width="84" height="24" rx="4" fill="rgba(255,183,77,0.1)" stroke="#ffb74d" stroke-width=".8"/><text x="330" y="94" fill="#ffd54f" font-size="7" text-anchor="middle" font-family="monospace">Trend Monitor</text><line x1="112" y1="90" x2="158" y2="90" stroke="#4dd0c4" stroke-width="1" stroke-dasharray="3,3"/><line x1="242" y1="90" x2="288" y2="90" stroke="#ffb74d" stroke-width="1" stroke-dasharray="3,3"/><text x="200" y="128" fill="rgba(255,213,79,0.35)" font-size="7" text-anchor="middle" font-family="monospace">Real-time traffic spike monitoring</text>`
             },
             {
                 title: 'MovePro – Logistics Platform',
@@ -832,7 +957,7 @@
                 },
                 desc: 'Full-stack logistics web app for booking trucks and reserving warehouse space with real-time availability, role-based access, and complete booking history.',
                 metrics: [['Real-Time','Availability'],['RBAC','Auth'],['Full','History']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><rect x="20" y="20" width="360" height="140" rx="8" fill="rgba(0,200,83,0.03)" stroke="#00c853" stroke-width=".5"/><rect x="20" y="20" width="360" height="28" rx="8" fill="rgba(0,200,83,0.08)"/><text x="40" y="38" fill="#00c853" font-size="9" font-family="monospace">MovePro — Logistics Platform</text><rect x="40" y="62" width="140" height="70" rx="6" fill="rgba(0,200,83,0.05)" stroke="#00c853" stroke-width=".8"/><text x="110" y="80" fill="#00c853" font-size="8" text-anchor="middle" font-family="monospace">Book a Truck</text><rect x="50" y="86" width="120" height="12" rx="3" fill="rgba(0,200,83,0.1)"/><rect x="50" y="104" width="120" height="12" rx="3" fill="rgba(0,200,83,0.1)"/><rect x="200" y="62" width="160" height="70" rx="6" fill="rgba(0,200,83,0.05)" stroke="#00c853" stroke-width=".8"/><text x="280" y="80" fill="#00c853" font-size="8" text-anchor="middle" font-family="monospace">Warehouse Status</text><rect x="210" y="86" width="60" height="8" rx="2" fill="rgba(0,200,83,0.2)"/><text x="240" y="93" fill="#00e676" font-size="6" text-anchor="middle" font-family="monospace">Unit A — FREE</text><rect x="210" y="100" width="60" height="8" rx="2" fill="rgba(255,80,80,0.15)"/><text x="240" y="107" fill="#ff5050" font-size="6" text-anchor="middle" font-family="monospace">Unit B — FULL</text>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><rect x="20" y="20" width="360" height="140" rx="8" fill="rgba(0,0,0,0.2)" stroke="rgba(0,191,165,0.2)" stroke-width=".5"/><rect x="20" y="20" width="360" height="28" rx="8" fill="rgba(0,191,165,0.1)"/><text x="40" y="38" fill="#4dd0c4" font-size="9" font-family="monospace">MovePro — Logistics Platform</text><rect x="40" y="62" width="140" height="70" rx="6" fill="rgba(0,200,83,0.06)" stroke="#00c853" stroke-width=".8"/><text x="110" y="80" fill="#69ff97" font-size="8" text-anchor="middle" font-family="monospace">Book a Truck</text><rect x="50" y="86" width="120" height="10" rx="3" fill="rgba(0,200,83,0.12)"/><rect x="50" y="102" width="120" height="10" rx="3" fill="rgba(0,200,83,0.12)"/><rect x="200" y="62" width="160" height="70" rx="6" fill="rgba(255,183,77,0.06)" stroke="#ffb74d" stroke-width=".8"/><text x="280" y="80" fill="#ffd54f" font-size="8" text-anchor="middle" font-family="monospace">Warehouse</text><rect x="210" y="86" width="60" height="8" rx="2" fill="rgba(0,200,83,0.2)"/><text x="240" y="93" fill="#69ff97" font-size="6" text-anchor="middle" font-family="monospace">Unit A — FREE</text><rect x="210" y="100" width="60" height="8" rx="2" fill="rgba(255,80,80,0.15)"/><text x="240" y="107" fill="#ef9a9a" font-size="6" text-anchor="middle" font-family="monospace">Unit B — FULL</text>`
             },
             {
                 title: 'IoT Parking Management',
@@ -845,7 +970,7 @@
                 },
                 desc: 'Real-time parking slot monitoring with live sensor data, encrypted transmission from IoT nodes to a web dashboard showing availability across all zones.',
                 metrics: [['Real-Time','Monitoring'],['Encrypted','Transport'],['Web','Dashboard']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><g stroke="#00c853" stroke-width="1" fill="none" opacity=".4"><rect x="30" y="40" width="50" height="30" rx="3"/><rect x="90" y="40" width="50" height="30" rx="3"/><rect x="150" y="40" width="50" height="30" rx="3"/><rect x="30" y="80" width="50" height="30" rx="3"/><rect x="90" y="80" width="50" height="30" rx="3"/><rect x="150" y="80" width="50" height="30" rx="3"/></g><rect x="30" y="40" width="50" height="30" rx="3" fill="rgba(255,80,80,0.15)" stroke="#ff5050" stroke-width="1"/><rect x="90" y="80" width="50" height="30" rx="3" fill="rgba(255,80,80,0.15)" stroke="#ff5050" stroke-width="1"/><rect x="150" y="40" width="50" height="30" rx="3" fill="rgba(0,200,83,0.15)" stroke="#00c853" stroke-width="1.5"/><rect x="30" y="80" width="50" height="30" rx="3" fill="rgba(0,200,83,0.15)" stroke="#00c853" stroke-width="1.5"/><text x="55" y="60" fill="#ff5050" font-size="7" text-anchor="middle" font-family="monospace">OCC</text><text x="175" y="60" fill="#00c853" font-size="7" text-anchor="middle" font-family="monospace">FREE</text><circle cx="300" cy="90" r="6" fill="#00e676" opacity=".8"><animate attributeName="r" values="6;10;6" dur="1.5s" repeatCount="indefinite"/></circle><text x="300" y="70" fill="#00e676" font-size="9" text-anchor="middle" font-family="monospace">LIVE</text>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><g stroke="rgba(100,130,120,0.3)" stroke-width="1" fill="none"><rect x="30" y="40" width="50" height="30" rx="3"/><rect x="90" y="40" width="50" height="30" rx="3"/><rect x="150" y="40" width="50" height="30" rx="3"/><rect x="30" y="80" width="50" height="30" rx="3"/><rect x="90" y="80" width="50" height="30" rx="3"/><rect x="150" y="80" width="50" height="30" rx="3"/></g><rect x="30" y="40" width="50" height="30" rx="3" fill="rgba(239,154,154,0.15)" stroke="#ef9a9a" stroke-width="1"/><rect x="90" y="80" width="50" height="30" rx="3" fill="rgba(239,154,154,0.15)" stroke="#ef9a9a" stroke-width="1"/><rect x="150" y="40" width="50" height="30" rx="3" fill="rgba(0,191,165,0.15)" stroke="#00bfa5" stroke-width="1.5"/><rect x="30" y="80" width="50" height="30" rx="3" fill="rgba(0,191,165,0.15)" stroke="#00bfa5" stroke-width="1.5"/><text x="55" y="60" fill="#ef9a9a" font-size="7" text-anchor="middle" font-family="monospace">OCC</text><text x="175" y="60" fill="#4dd0c4" font-size="7" text-anchor="middle" font-family="monospace">FREE</text><text x="55" y="100" fill="#4dd0c4" font-size="7" text-anchor="middle" font-family="monospace">FREE</text><circle cx="300" cy="88" r="7" fill="#ffb74d" opacity=".85"><animate attributeName="r" values="7;13;7" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".85;.2;.85" dur="1.5s" repeatCount="indefinite"/></circle><text x="300" y="68" fill="#ffd54f" font-size="9" text-anchor="middle" font-family="monospace">LIVE</text><text x="200" y="155" fill="rgba(0,191,165,0.4)" font-size="8" text-anchor="middle" font-family="monospace" letter-spacing="2px">ENCRYPTED · IOT</text>`
             },
             {
                 title: 'E-Library with Audiobook Support',
@@ -860,7 +985,7 @@
                 },
                 desc: 'Desktop e-library supporting PDF browsing, audiobook playback, user authentication, and personalised collections with secure role-based data storage.',
                 metrics: [['PDF','+ Audio'],['Secure','Login'],['SQLite','Backend']],
-                svg: `<rect width="400" height="180" fill="#020a06"/><g fill="none"><rect x="30" y="50" width="20" height="60" rx="2" fill="rgba(0,200,83,0.6)"/><rect x="55" y="60" width="20" height="50" rx="2" fill="rgba(0,191,165,0.6)"/><rect x="80" y="45" width="20" height="65" rx="2" fill="rgba(0,200,83,0.4)"/><rect x="105" y="55" width="20" height="55" rx="2" fill="rgba(0,230,118,0.5)"/><line x1="20" y1="115" x2="140" y2="115" stroke="#00c853" stroke-width="2"/></g><g transform="translate(200,90)" stroke="#00c853" stroke-width="2" fill="none"><path d="M-60 0 Q-50 -30 -40 0 Q-30 30 -20 0 Q-10 -25 0 0 Q10 25 20 0 Q30 -20 40 0 Q50 20 60 0"/><animate attributeName="opacity" values="1;.4;1" dur="2s" repeatCount="indefinite"/></g><circle cx="200" cy="90" r="14" fill="none" stroke="#00e676" stroke-width="2"><animate attributeName="r" values="14;20;14" dur="2s" repeatCount="indefinite"/></circle>`
+                svg: `<rect width="400" height="180" fill="#020a06"/><g fill="none"><rect x="30" y="50" width="20" height="60" rx="2" fill="rgba(0,191,165,0.65)"/><rect x="55" y="60" width="20" height="50" rx="2" fill="rgba(179,157,219,0.65)"/><rect x="80" y="45" width="20" height="65" rx="2" fill="rgba(255,183,77,0.55)"/><rect x="105" y="55" width="20" height="55" rx="2" fill="rgba(0,200,83,0.55)"/><line x1="20" y1="115" x2="140" y2="115" stroke="#4dd0c4" stroke-width="1.5"/></g><g transform="translate(200,90)" stroke="#b39ddb" stroke-width="2" fill="none"><path d="M-60 0 Q-50 -30 -40 0 Q-30 30 -20 0 Q-10 -25 0 0 Q10 25 20 0 Q30 -20 40 0 Q50 20 60 0"/><animate attributeName="opacity" values="1;.3;1" dur="2s" repeatCount="indefinite"/></g><circle cx="200" cy="90" r="14" fill="none" stroke="#ffb74d" stroke-width="2"><animate attributeName="r" values="14;22;14" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/></circle>`
             }
         ];
 
@@ -894,6 +1019,50 @@
             </div>`;
         }
 
+        function buildFlipBtn() {
+            const next = (currentPage + 1) % totalPages;
+            const nextStart = next * PAGE_SIZE;
+            const count = Math.min(PAGE_SIZE, allProjects.length - nextStart);
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = `
+                position:relative;border-radius:20px;overflow:hidden;
+                background:rgba(0,0,0,0.3);
+                border:1px solid rgba(0,200,83,0.15);
+                box-shadow:0 6px 28px rgba(0,0,0,0.45);
+                display:flex;flex-direction:column;
+                align-items:center;justify-content:center;
+                min-height:260px;cursor:none;
+                transition:background .4s,border-color .4s,box-shadow .4s;
+            `;
+            wrapper.innerHTML = `
+                <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(0,200,83,0.02) 8px,rgba(0,200,83,0.02) 9px);pointer-events:none;"></div>
+                <div class="flip-icon" style="width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(0,200,83,0.4);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.4rem;color:var(--green-bright);transition:transform .5s cubic-bezier(.34,1.56,.64,1),border-color .3s,box-shadow .3s;position:relative;z-index:1;">↺</div>
+                <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--green-bright);letter-spacing:1px;text-align:center;margin-bottom:.5rem;position:relative;z-index:1;">Next Projects</div>
+                <div style="font-family:'DM Mono',monospace;font-size:0.68rem;color:rgba(200,230,210,0.35);letter-spacing:1px;text-align:center;position:relative;z-index:1;">${count} more to show</div>
+                <div class="flip-line" style="position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,83,0.5),transparent);opacity:0;transition:opacity .4s;"></div>
+            `;
+            wrapper.addEventListener('mouseenter', () => {
+                wrapper.style.background = 'rgba(0,200,83,0.06)';
+                wrapper.style.borderColor = 'rgba(0,200,83,0.35)';
+                wrapper.style.boxShadow = '0 0 50px rgba(0,200,83,0.12),0 12px 40px rgba(0,0,0,0.5)';
+                wrapper.querySelector('.flip-icon').style.transform = 'rotate(180deg)';
+                wrapper.querySelector('.flip-icon').style.borderColor = 'rgba(0,200,83,0.8)';
+                wrapper.querySelector('.flip-icon').style.boxShadow = '0 0 20px rgba(0,200,83,0.3)';
+                wrapper.querySelector('.flip-line').style.opacity = '1';
+            });
+            wrapper.addEventListener('mouseleave', () => {
+                wrapper.style.background = 'rgba(0,0,0,0.3)';
+                wrapper.style.borderColor = 'rgba(0,200,83,0.15)';
+                wrapper.style.boxShadow = '0 6px 28px rgba(0,0,0,0.45)';
+                wrapper.querySelector('.flip-icon').style.transform = 'rotate(0deg)';
+                wrapper.querySelector('.flip-icon').style.borderColor = 'rgba(0,200,83,0.4)';
+                wrapper.querySelector('.flip-icon').style.boxShadow = 'none';
+                wrapper.querySelector('.flip-line').style.opacity = '0';
+            });
+            wrapper.addEventListener('click', () => renderPage((currentPage + 1) % totalPages));
+            return wrapper;
+        }
+
         function renderPage(page) {
             currentPage = page;
             const grid = document.getElementById('projects-grid');
@@ -903,38 +1072,14 @@
             grid.style.transform = 'translateY(16px)';
             setTimeout(() => {
                 grid.innerHTML = slice.map(buildCard).join('');
+                grid.appendChild(buildFlipBtn());
                 grid.style.transition = 'opacity .4s ease, transform .4s ease';
                 grid.style.opacity = '1';
                 grid.style.transform = 'translateY(0)';
                 attachTechTooltips();
                 attachCardEffects();
             }, 200);
-            // Update dots
-            document.querySelectorAll('.proj-dot').forEach((d,i) => {
-                d.classList.toggle('active', i === page);
-            });
-            // Update More Projects button
-            const btn = document.getElementById('more-projects-btn');
-            if (page === totalPages - 1) {
-                btn.textContent = '← Back to Top Projects';
-            } else {
-                btn.textContent = 'More Projects →';
-            }
         }
-
-        function buildDots() {
-            const container = document.getElementById('proj-dots');
-            for (let i = 0; i < totalPages; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'proj-dot' + (i === 0 ? ' active' : '');
-                dot.addEventListener('click', () => renderPage(i));
-                container.appendChild(dot);
-            }
-        }
-
-        document.getElementById('more-projects-btn').addEventListener('click', () => {
-            renderPage(currentPage === totalPages - 1 ? 0 : currentPage + 1);
-        });
 
         function attachTechTooltips() {
             const tooltip = document.getElementById('tech-tooltip');
@@ -959,18 +1104,7 @@
         function attachCardEffects() {
             // Re-apply cursor hover states to new cards
             document.querySelectorAll('.project-card, .project-link, .tech-tag').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursorDot.style.width = '18px'; cursorDot.style.height = '18px';
-                    cursorDot.style.background = '#fff';
-                    cursorDot.style.boxShadow = '0 0 20px #fff,0 0 40px rgba(0,230,118,0.8)';
-                    cursorRing.style.width = '54px'; cursorRing.style.height = '54px';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursorDot.style.width = '10px'; cursorDot.style.height = '10px';
-                    cursorDot.style.background = '#00e676';
-                    cursorDot.style.boxShadow = '0 0 12px #00e676,0 0 30px rgba(0,230,118,0.6)';
-                    cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
-                });
+                // no cursor class changes needed
             });
             // Re-apply tilt
             document.querySelectorAll('.project-card').forEach(card => {
@@ -994,7 +1128,6 @@
         }
 
         // Init projects
-        buildDots();
         renderPage(0);
 
 
@@ -1049,8 +1182,8 @@
             const row1 = techs.slice(10, 20);
             const row2 = techs.slice(20);
 
-            // Base speeds (px/frame) — very slow
-            const baseSpeeds = [0.28, 0.20, 0.24];
+            // Base speeds (px/frame) — very slow, cloud-like drift
+            const baseSpeeds = [0.18, 0.13, 0.16];
 
             function makePill(tech) {
                 const [name, where, exp] = tech;
@@ -1058,27 +1191,33 @@
                 el.textContent = name;
                 el.style.cssText = `
                     display:inline-block;
-                    padding:9px 20px;
-                    background:rgba(0,200,83,0.04);
-                    border:1px solid rgba(0,200,83,0.14);
+                    padding:10px 22px;
+                    background:rgba(0,200,83,0.05);
+                    border:1px solid rgba(0,200,83,0.16);
                     border-radius:100px;
                     font-family:'DM Mono',monospace;
-                    font-size:0.78rem;
+                    font-size:0.8rem;
                     font-weight:500;
                     white-space:nowrap;
-                    letter-spacing:.5px;
-                    color:var(--text);
+                    letter-spacing:.6px;
+                    color:rgba(200,230,210,0.75);
                     cursor:none;
-                    transition:background .3s, border-color .3s, box-shadow .3s, color .3s;
-                    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+                    transition:background .3s, border-color .3s, box-shadow .3s, color .3s, transform .3s;
+                    box-shadow: 0 3px 16px rgba(0,0,0,0.4), 0 1px 0 rgba(0,200,83,0.06) inset;
+                    backdrop-filter:blur(4px);
                 `;
                 el.addEventListener('mouseenter', () => {
-                    el.style.background = 'rgba(0,200,83,0.12)';
-                    el.style.borderColor = 'rgba(0,200,83,0.4)';
-                    el.style.boxShadow = '0 0 18px rgba(0,200,83,0.2)';
-                    el.style.color = 'var(--green-bright)';
+                    el.style.background = 'rgba(0,200,83,0.13)';
+                    el.style.borderColor = 'rgba(0,200,83,0.45)';
+                    el.style.boxShadow = '0 0 22px rgba(0,200,83,0.22), 0 4px 20px rgba(0,0,0,0.4)';
+                    el.style.color = '#69ff97';
+                    el.style.transform = 'translateY(-2px)';
                     const tt = document.getElementById('cloud-tooltip');
-                    tt.innerHTML = `<span style="color:var(--green-bright);font-size:0.75rem;display:block;margin-bottom:5px;">${name}</span><span style="opacity:.7;">📍 ${where}</span><br><span style="opacity:.7;">⏱ ${exp}</span>`;
+                    tt.innerHTML = `
+                        <span style="color:#69ff97;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;display:block;margin-bottom:7px;">${name}</span>
+                        <span style="color:rgba(200,230,210,0.55);font-size:0.68rem;display:block;margin-bottom:4px;">📍 ${where}</span>
+                        <span style="color:rgba(0,230,118,0.7);font-size:0.68rem;">⏱ ${exp}</span>
+                    `;
                     tt.style.display = 'block';
                 });
                 el.addEventListener('mousemove', e => {
@@ -1089,10 +1228,11 @@
                     tt.style.top = y + 'px';
                 });
                 el.addEventListener('mouseleave', () => {
-                    el.style.background = 'rgba(0,200,83,0.04)';
-                    el.style.borderColor = 'rgba(0,200,83,0.14)';
-                    el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.3)';
-                    el.style.color = 'var(--text)';
+                    el.style.background = 'rgba(0,200,83,0.05)';
+                    el.style.borderColor = 'rgba(0,200,83,0.16)';
+                    el.style.boxShadow = '0 3px 16px rgba(0,0,0,0.4), 0 1px 0 rgba(0,200,83,0.06) inset';
+                    el.style.color = 'rgba(200,230,210,0.75)';
+                    el.style.transform = 'translateY(0)';
                     document.getElementById('cloud-tooltip').style.display = 'none';
                 });
                 return el;
@@ -1114,13 +1254,12 @@
             const cloudEl = document.getElementById('tech-cloud');
             cloudEl.addEventListener('mousemove', e => {
                 const rect = cloudEl.getBoundingClientRect();
-                // left side = slow, right side = fast
-                const ratio = (e.clientX - rect.left) / rect.width; // 0..1
-                cursorInfluence = (ratio - 0.5) * 0.9; // −0.45 .. +0.45
+                const ratio = (e.clientX - rect.left) / rect.width;
+                cursorInfluence = (ratio - 0.5) * 1.1;
             });
-            cloudEl.addEventListener('mouseleave', () => {
-                cursorInfluence = 0;
-            });
+            cloudEl.addEventListener('mouseleave', () => { cursorInfluence = 0; });
+
+            // tech cloud click removed — flowchart button is at the bottom of the page
 
             function animate() {
                 rowData.forEach((techs, ri) => {
@@ -1206,6 +1345,29 @@
             }
         });
 
+        /* ── Knowledge map modal wiring ── */
+        function openKnowledgeMap() {
+            const modal = document.getElementById('knowledge-modal');
+            if (modal) { modal.style.display = 'flex'; modal.scrollTop = 0; }
+        }
+        function closeKnowledgeMap() {
+            const modal = document.getElementById('knowledge-modal');
+            if (!modal) return;
+            modal.style.display = 'none';
+            modal.scrollTop = 0;
+        }
+        // Wire buttons safely after DOM loads
+        window.addEventListener('DOMContentLoaded', () => {
+            const closeBtn = document.getElementById('kmap-close-btn');
+            const bottomClose = document.getElementById('kmap-bottom-close');
+            const openBtn = document.getElementById('kmap-open-btn');
+            if (closeBtn) closeBtn.addEventListener('click', closeKnowledgeMap);
+            if (bottomClose) bottomClose.addEventListener('click', closeKnowledgeMap);
+            if (openBtn) openBtn.addEventListener('click', openKnowledgeMap);
+        });
+        // Escape key
+        window.addEventListener('keydown', e => { if (e.key === 'Escape') closeKnowledgeMap(); });
+
         /* ── Nav scroll + top button ── */
         const topBtn = document.getElementById('top-btn');
         window.addEventListener('scroll', () => {
@@ -1257,67 +1419,15 @@
         }, { threshold: 0.15 });
         document.querySelectorAll('.contact-reveal').forEach(el => contactObs.observe(el));
 
-        /* ── Custom glowing cursor ── */
-        const cursorDot = document.createElement('div');
-        cursorDot.style.cssText = 'position:fixed;width:7px;height:7px;border-radius:50%;background:#00e676;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 5px rgba(0,230,118,0.6);transition:width .2s,height .2s,background .2s;mix-blend-mode:normal;';
-        const cursorRing = document.createElement('div');
-        cursorRing.style.cssText = 'position:fixed;width:28px;height:28px;border-radius:50%;border:1px solid rgba(0,230,118,0.3);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease-out;';
-        document.body.appendChild(cursorDot);
-        document.body.appendChild(cursorRing);
-        document.body.style.cursor = 'none';
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-        /* ── Trail ── */
-        const TRAIL_LEN = 12;
-        const trail = Array.from({length: TRAIL_LEN}, (_, i) => {
-            const d = document.createElement('div');
-            const size = Math.max(1.5, 5 - i * 0.3);
-            d.style.cssText = `position:fixed;border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);width:${size}px;height:${size}px;background:rgba(0,230,118,${0.25 - i * 0.018});`;
-            document.body.appendChild(d);
-            return { el: d };
-        });
-
-        /* ── Cursor hover states ── */
-        document.querySelectorAll('a, button, .project-card, .exp-card, .skill-card, .cert-card, .edu-card, .tech-pill, .cta-btn, .contact-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorDot.style.width = '10px'; cursorDot.style.height = '10px';
-                cursorDot.style.background = 'rgba(255,255,255,0.9)';
-                cursorDot.style.boxShadow = '0 0 8px rgba(255,255,255,0.4)';
-                cursorRing.style.width = '38px'; cursorRing.style.height = '38px';
-                cursorRing.style.borderColor = 'rgba(0,230,118,0.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursorDot.style.width = '7px'; cursorDot.style.height = '7px';
-                cursorDot.style.background = '#00e676';
-                cursorDot.style.boxShadow = '0 0 5px rgba(0,230,118,0.6)';
-                cursorRing.style.width = '28px'; cursorRing.style.height = '28px';
-                cursorRing.style.borderColor = 'rgba(0,230,118,0.3)';
-                cursorRing.style.boxShadow = 'none';
-            });
-        });
-
-        /* ── Click burst ── */
-        window.addEventListener('click', e => {
-            const chars = ['0','1','·','›','<','>','/','#','%','$'];
-            for (let i = 0; i < 16; i++) {
-                const p = document.createElement('div');
-                const angle = (Math.PI * 2 / 16) * i + Math.random() * 0.4;
-                const speed = 60 + Math.random() * 80;
-                const tx = Math.cos(angle) * speed, ty = Math.sin(angle) * speed;
-                const isChar = Math.random() > 0.5;
-                p.textContent = isChar ? chars[Math.floor(Math.random() * chars.length)] : '';
-                p.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;pointer-events:none;z-index:9999;color:#00e676;font-family:'DM Mono',monospace;font-size:${isChar ? 11 : 0}px;width:${isChar ? 'auto' : 5}px;height:${isChar ? 'auto' : 5}px;${!isChar ? 'background:#00e676;border-radius:50%;box-shadow:0 0 8px #00e676;' : ''}transform:translate(-50%,-50%);transition:transform 0.7s cubic-bezier(.17,.67,.35,1),opacity 0.7s ease;opacity:1;`;
-                document.body.appendChild(p);
-                requestAnimationFrame(() => { p.style.transform = `translate(calc(-50% + ${tx}px),calc(-50% + ${ty}px))`; p.style.opacity = '0'; });
-                setTimeout(() => p.remove(), 750);
-            }
-            const ring = document.createElement('div');
-            ring.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:10px;height:10px;border-radius:50%;border:2px solid #00e676;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .6s ease,height .6s ease,opacity .6s ease;opacity:1;`;
-            document.body.appendChild(ring);
-            requestAnimationFrame(() => { ring.style.width = '120px'; ring.style.height = '120px'; ring.style.opacity = '0'; });
-            setTimeout(() => ring.remove(), 650);
-        });
+        /* ── Cursor: simple green dot + ring, GPU via transform ── */
+        /* ── Minimal cursor: single green dot, instant, no animation ── */
+        const dot = document.createElement('div');
+        dot.id = 'dot';
+        document.body.appendChild(dot);
+        window.addEventListener('mousemove', e => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top  = e.clientY + 'px';
+        }, { passive: true });
 
         /* ── Card tilt ── */
         document.querySelectorAll('.project-card, .exp-card, .skill-card').forEach(card => {
@@ -1332,21 +1442,244 @@
             card.addEventListener('mouseenter', () => { card.style.transition = 'box-shadow .1s,border-color .3s'; });
         });
 
-        /* ── Cursor animation loop ── */
-        let trailPositions = Array(TRAIL_LEN).fill({ x: 0, y: 0 });
-        function animCursor() {
-            rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-            cursorDot.style.left = mx + 'px'; cursorDot.style.top = my + 'px';
-            cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
-            trailPositions = [{ x: mx, y: my }, ...trailPositions.slice(0, TRAIL_LEN - 1)];
-            trail.forEach((t, i) => {
-                const pos = trailPositions[i] || { x: mx, y: my };
-                t.el.style.left = pos.x + 'px'; t.el.style.top = pos.y + 'px';
-            });
-            requestAnimationFrame(animCursor);
-        }
-        animCursor();
-
     </script>
+    <!-- KNOWLEDGE MAP MODAL -->
+    <div id="knowledge-modal" onclick="if(event.target===this)closeKnowledgeMap()" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(1,6,2,0.97);backdrop-filter:blur(12px);align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem 1rem;">
+
+        <!-- close button -->
+        <button id="kmap-close-btn" style="position:fixed;top:1.5rem;right:1.5rem;z-index:100000;width:40px;height:40px;border-radius:50%;background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.35);color:var(--green-bright);font-size:1.1rem;cursor:none;transition:all .3s;" onmouseenter="this.style.background='rgba(0,200,83,0.2)'" onmouseleave="this.style.background='rgba(0,200,83,0.1)'">✕</button>
+
+        <div style="max-width:1100px;width:100%;padding-top:1rem;">
+            <!-- header -->
+            <div style="text-align:center;margin-bottom:3rem;">
+                <div style="font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;color:rgba(0,200,83,0.5);margin-bottom:.6rem;">// knowledge architecture</div>
+                <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-1px;color:var(--text);">Uzaif's Knowledge Map</h2>
+                <p style="font-size:0.78rem;color:var(--text-dim);margin-top:.5rem;">Everything I know, how it connects, and where it leads.</p>
+            </div>
+
+            <!-- FLOWCHART SVG -->
+            <svg id="kmap-svg" viewBox="0 0 900 1080" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DM Mono',monospace;">
+                <defs>
+                    <marker id="a0" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="rgba(0,200,83,0.5)"/></marker>
+                    <marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="rgba(0,191,165,0.6)"/></marker>
+                    <marker id="a2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="rgba(179,157,219,0.6)"/></marker>
+                    <marker id="a3" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="rgba(255,183,77,0.6)"/></marker>
+                    <marker id="a4" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="rgba(239,154,154,0.6)"/></marker>
+                    <filter id="fg"><feGaussianBlur stdDeviation="4"/><feComposite operator="over" in="SourceGraphic"/></filter>
+                </defs>
+
+                <!-- ── ROOT ── -->
+                <rect x="275" y="18" width="350" height="62" rx="16" fill="rgba(0,200,83,0.14)" stroke="#00e676" stroke-width="2" filter="url(#fg)"/>
+                <text x="450" y="44" fill="#69ff97" font-size="16" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">Uzaif Shaikh</text>
+                <text x="450" y="64" fill="rgba(200,230,210,0.55)" font-size="10" text-anchor="middle">DevOps · SRE · Cloud Security Engineer</text>
+
+                <!-- root → 5 pillars -->
+                <line x1="450" y1="80" x2="90"  y2="168" stroke="rgba(0,200,83,0.3)"    stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a0)"/>
+                <line x1="450" y1="80" x2="255" y2="168" stroke="rgba(0,191,165,0.3)"   stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a1)"/>
+                <line x1="450" y1="80" x2="450" y2="168" stroke="rgba(179,157,219,0.3)" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a2)"/>
+                <line x1="450" y1="80" x2="645" y2="168" stroke="rgba(255,183,77,0.3)"  stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a3)"/>
+                <line x1="450" y1="80" x2="810" y2="168" stroke="rgba(239,154,154,0.3)" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#a4)"/>
+
+                <!-- ── PILLAR 1: CLOUD ── -->
+                <rect x="10"  y="168" width="160" height="52" rx="12" fill="rgba(0,200,83,0.12)" stroke="#00c853" stroke-width="1.5"/>
+                <text x="90"  y="190" fill="#69ff97" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">☁ Cloud</text>
+                <text x="90"  y="207" fill="rgba(200,230,210,0.5)" font-size="9" text-anchor="middle">AWS · Azure · VMware</text>
+
+                <line x1="90" y1="220" x2="40"  y2="290" stroke="rgba(0,200,83,0.25)" stroke-width="1.2" marker-end="url(#a0)"/>
+                <line x1="90" y1="220" x2="90"  y2="290" stroke="rgba(0,200,83,0.25)" stroke-width="1.2" marker-end="url(#a0)"/>
+                <line x1="90" y1="220" x2="146" y2="290" stroke="rgba(0,200,83,0.25)" stroke-width="1.2" marker-end="url(#a0)"/>
+
+                <rect x="4"   y="290" width="72" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(0,200,83,0.2)" stroke-width="1"/>
+                <text x="40"  y="309" fill="#00c853" font-size="9" text-anchor="middle">AWS</text>
+                <text x="40"  y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">EC2·ECS·Lambda</text>
+                <text x="40"  y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">S3·RDS·CloudWatch</text>
+
+                <rect x="54"  y="290" width="72" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(0,200,83,0.2)" stroke-width="1"/>
+                <text x="90"  y="309" fill="#00c853" font-size="9" text-anchor="middle">Azure</text>
+                <text x="90"  y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">AD · Defender</text>
+                <text x="90"  y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">AKS · Monitor</text>
+
+                <rect x="110" y="290" width="72" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(0,200,83,0.2)" stroke-width="1"/>
+                <text x="146" y="309" fill="#00c853" font-size="9" text-anchor="middle">IaC</text>
+                <text x="146" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Terraform</text>
+                <text x="146" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Ansible · Git</text>
+
+                <!-- ── PILLAR 2: DEVOPS ── -->
+                <rect x="175" y="168" width="160" height="52" rx="12" fill="rgba(0,191,165,0.12)" stroke="#00bfa5" stroke-width="1.5"/>
+                <text x="255" y="190" fill="#4dd0c4" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">⚙ DevOps</text>
+                <text x="255" y="207" fill="rgba(200,230,210,0.5)" font-size="9" text-anchor="middle">CI/CD · Docker · K8s</text>
+
+                <line x1="255" y1="220" x2="205" y2="290" stroke="rgba(0,191,165,0.25)" stroke-width="1.2" marker-end="url(#a1)"/>
+                <line x1="255" y1="220" x2="255" y2="290" stroke="rgba(0,191,165,0.25)" stroke-width="1.2" marker-end="url(#a1)"/>
+                <line x1="255" y1="220" x2="308" y2="290" stroke="rgba(0,191,165,0.25)" stroke-width="1.2" marker-end="url(#a1)"/>
+
+                <rect x="170" y="290" width="72" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(0,191,165,0.2)" stroke-width="1"/>
+                <text x="206" y="309" fill="#00bfa5" font-size="9" text-anchor="middle">CI/CD</text>
+                <text x="206" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Jenkins</text>
+                <text x="206" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">GitHub Actions</text>
+
+                <rect x="218" y="290" width="72" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(0,191,165,0.2)" stroke-width="1"/>
+                <text x="254" y="309" fill="#00bfa5" font-size="9" text-anchor="middle">Containers</text>
+                <text x="254" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Docker</text>
+                <text x="254" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Kubernetes</text>
+
+                <rect x="270" y="290" width="72" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(0,191,165,0.2)" stroke-width="1"/>
+                <text x="306" y="309" fill="#00bfa5" font-size="9" text-anchor="middle">Observability</text>
+                <text x="306" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">CloudWatch</text>
+                <text x="306" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Splunk · Grafana</text>
+
+                <!-- ── PILLAR 3: PROGRAMMING ── -->
+                <rect x="370" y="168" width="160" height="52" rx="12" fill="rgba(179,157,219,0.12)" stroke="#b39ddb" stroke-width="1.5"/>
+                <text x="450" y="190" fill="#ce93d8" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">💻 Programming</text>
+                <text x="450" y="207" fill="rgba(200,230,210,0.5)" font-size="9" text-anchor="middle">Python · Go · Java · Bash</text>
+
+                <line x1="450" y1="220" x2="396" y2="290" stroke="rgba(179,157,219,0.25)" stroke-width="1.2" marker-end="url(#a2)"/>
+                <line x1="450" y1="220" x2="450" y2="290" stroke="rgba(179,157,219,0.25)" stroke-width="1.2" marker-end="url(#a2)"/>
+                <line x1="450" y1="220" x2="506" y2="290" stroke="rgba(179,157,219,0.25)" stroke-width="1.2" marker-end="url(#a2)"/>
+
+                <rect x="358" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(179,157,219,0.2)" stroke-width="1"/>
+                <text x="396" y="309" fill="#b39ddb" font-size="9" text-anchor="middle">Languages</text>
+                <text x="396" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Python · Go</text>
+                <text x="396" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Java · Bash · JS</text>
+
+                <rect x="412" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(179,157,219,0.2)" stroke-width="1"/>
+                <text x="450" y="309" fill="#b39ddb" font-size="9" text-anchor="middle">Frameworks</text>
+                <text x="450" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Django · FastAPI</text>
+                <text x="450" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">PowerShell · SQL</text>
+
+                <rect x="466" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(179,157,219,0.2)" stroke-width="1"/>
+                <text x="504" y="309" fill="#b39ddb" font-size="9" text-anchor="middle">Principles</text>
+                <text x="504" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">SOLID · OOP</text>
+                <text x="504" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Design Patterns</text>
+
+                <!-- ── PILLAR 4: SECURITY ── -->
+                <rect x="565" y="168" width="160" height="52" rx="12" fill="rgba(255,183,77,0.12)" stroke="#ffb74d" stroke-width="1.5"/>
+                <text x="645" y="190" fill="#ffd54f" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">🛡 Security</text>
+                <text x="645" y="207" fill="rgba(200,230,210,0.5)" font-size="9" text-anchor="middle">DevSecOps · SIEM · Pentest</text>
+
+                <line x1="645" y1="220" x2="592" y2="290" stroke="rgba(255,183,77,0.25)" stroke-width="1.2" marker-end="url(#a3)"/>
+                <line x1="645" y1="220" x2="645" y2="290" stroke="rgba(255,183,77,0.25)" stroke-width="1.2" marker-end="url(#a3)"/>
+                <line x1="645" y1="220" x2="698" y2="290" stroke="rgba(255,183,77,0.25)" stroke-width="1.2" marker-end="url(#a3)"/>
+
+                <rect x="554" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(255,183,77,0.2)" stroke-width="1"/>
+                <text x="592" y="309" fill="#ffb74d" font-size="9" text-anchor="middle">Pen Testing</text>
+                <text x="592" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Nmap · Burp</text>
+                <text x="592" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Metasploit · Kali</text>
+
+                <rect x="608" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(255,183,77,0.2)" stroke-width="1"/>
+                <text x="646" y="309" fill="#ffb74d" font-size="9" text-anchor="middle">Hardening</text>
+                <text x="646" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">IAM · MFA</text>
+                <text x="646" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Nessus · WAF</text>
+
+                <rect x="660" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(255,183,77,0.2)" stroke-width="1"/>
+                <text x="698" y="309" fill="#ffb74d" font-size="9" text-anchor="middle">SIEM</text>
+                <text x="698" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Splunk · IDS/IPS</text>
+                <text x="698" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Defender · OpenVAS</text>
+
+                <!-- ── PILLAR 5: AI & WEB3 ── -->
+                <rect x="730" y="168" width="160" height="52" rx="12" fill="rgba(239,154,154,0.12)" stroke="#ef9a9a" stroke-width="1.5"/>
+                <text x="810" y="190" fill="#ef9a9a" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">✦ AI &amp; Web3</text>
+                <text x="810" y="207" fill="rgba(200,230,210,0.5)" font-size="9" text-anchor="middle">LLM · RAG · Blockchain</text>
+
+                <line x1="810" y1="220" x2="756" y2="290" stroke="rgba(239,154,154,0.25)" stroke-width="1.2" marker-end="url(#a4)"/>
+                <line x1="810" y1="220" x2="810" y2="290" stroke="rgba(239,154,154,0.25)" stroke-width="1.2" marker-end="url(#a4)"/>
+                <line x1="810" y1="220" x2="864" y2="290" stroke="rgba(239,154,154,0.25)" stroke-width="1.2" marker-end="url(#a4)"/>
+
+                <rect x="718" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(239,154,154,0.2)" stroke-width="1"/>
+                <text x="756" y="309" fill="#ef9a9a" font-size="9" text-anchor="middle">AI Stack</text>
+                <text x="756" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">LLM · RAG</text>
+                <text x="756" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Whisper · CLIP</text>
+
+                <rect x="772" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(239,154,154,0.2)" stroke-width="1"/>
+                <text x="810" y="309" fill="#ef9a9a" font-size="9" text-anchor="middle">MLOps</text>
+                <text x="810" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">SageMaker</text>
+                <text x="810" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Hugging Face</text>
+
+                <rect x="826" y="290" width="76" height="44" rx="8" fill="rgba(0,0,0,0.35)" stroke="rgba(239,154,154,0.2)" stroke-width="1"/>
+                <text x="864" y="309" fill="#ef9a9a" font-size="9" text-anchor="middle">Blockchain</text>
+                <text x="864" y="323" fill="rgba(200,230,210,0.4)" font-size="8" text-anchor="middle">Ethereum</text>
+                <text x="864" y="334" fill="rgba(200,230,210,0.35)" font-size="7.5" text-anchor="middle">Solidity · Web3</text>
+
+                <!-- ── CONVERGENCE LINES ── -->
+                <line x1="90"  y1="334" x2="300" y2="440" stroke="rgba(0,200,83,0.2)"    stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#a0)"/>
+                <line x1="255" y1="334" x2="370" y2="440" stroke="rgba(0,191,165,0.2)"   stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#a1)"/>
+                <line x1="450" y1="334" x2="450" y2="440" stroke="rgba(179,157,219,0.2)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#a2)"/>
+                <line x1="645" y1="334" x2="530" y2="440" stroke="rgba(255,183,77,0.2)"  stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#a3)"/>
+                <line x1="810" y1="334" x2="600" y2="440" stroke="rgba(239,154,154,0.2)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#a4)"/>
+
+                <!-- ── 3 OUTCOME NODES ── -->
+                <rect x="170" y="440" width="180" height="54" rx="12" fill="rgba(0,191,165,0.1)" stroke="#00bfa5" stroke-width="1.5"/>
+                <text x="260" y="462" fill="#4dd0c4" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">Infrastructure &amp; SRE</text>
+                <text x="260" y="479" fill="rgba(200,230,210,0.45)" font-size="9" text-anchor="middle">Build · Deploy · Observe</text>
+                <text x="260" y="490" fill="rgba(200,230,210,0.3)" font-size="8.5" text-anchor="middle">Terraform · K8s · Splunk · ServiceNow</text>
+
+                <rect x="360" y="440" width="180" height="54" rx="12" fill="rgba(179,157,219,0.1)" stroke="#b39ddb" stroke-width="1.5"/>
+                <text x="450" y="462" fill="#ce93d8" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">Software Engineering</text>
+                <text x="450" y="479" fill="rgba(200,230,210,0.45)" font-size="9" text-anchor="middle">Design · Code · Test · Ship</text>
+                <text x="450" y="490" fill="rgba(200,230,210,0.3)" font-size="8.5" text-anchor="middle">Python · Go · Java · Design Patterns</text>
+
+                <rect x="550" y="440" width="180" height="54" rx="12" fill="rgba(255,183,77,0.1)" stroke="#ffb74d" stroke-width="1.5"/>
+                <text x="640" y="462" fill="#ffd54f" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">Security Engineering</text>
+                <text x="640" y="479" fill="rgba(200,230,210,0.45)" font-size="9" text-anchor="middle">Assess · Harden · Respond</text>
+                <text x="640" y="490" fill="rgba(200,230,210,0.3)" font-size="8.5" text-anchor="middle">IAM · DevSecOps · Compliance</text>
+
+                <!-- ── OUTCOMES → FINAL ── -->
+                <line x1="260" y1="494" x2="390" y2="580" stroke="rgba(0,191,165,0.3)"   stroke-width="1.5" marker-end="url(#a1)"/>
+                <line x1="450" y1="494" x2="450" y2="580" stroke="rgba(179,157,219,0.3)" stroke-width="1.5" marker-end="url(#a2)"/>
+                <line x1="640" y1="494" x2="510" y2="580" stroke="rgba(255,183,77,0.3)"  stroke-width="1.5" marker-end="url(#a3)"/>
+
+                <!-- ── FINAL SYNTHESIS ── -->
+                <rect x="255" y="580" width="390" height="66" rx="16" fill="rgba(0,200,83,0.13)" stroke="#00e676" stroke-width="2" filter="url(#fg)"/>
+                <text x="450" y="606" fill="#69ff97" font-size="14" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">Cloud-Native · Secure · Reliable</text>
+                <text x="450" y="624" fill="rgba(200,230,210,0.55)" font-size="10" text-anchor="middle">Where all my expertise meets</text>
+                <text x="450" y="638" fill="rgba(0,200,83,0.5)" font-size="9" text-anchor="middle">SRE · DevOps · Cloud · Security · AI</text>
+
+                <!-- ── EDUCATION ── -->
+                <line x1="450" y1="646" x2="450" y2="718" stroke="rgba(0,200,83,0.2)" stroke-width="1" stroke-dasharray="5,4"/>
+                <text x="450" y="714" fill="rgba(0,200,83,0.35)" font-size="8" text-anchor="middle" letter-spacing="3">// academic foundation</text>
+
+                <rect x="60"  y="722" width="340" height="56" rx="12" fill="rgba(0,200,83,0.07)" stroke="rgba(0,200,83,0.25)" stroke-width="1"/>
+                <text x="230" y="744" fill="#69ff97" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">MSc Cybersecurity</text>
+                <text x="230" y="760" fill="rgba(200,230,210,0.45)" font-size="9" text-anchor="middle">National College of Ireland · 2023–2024</text>
+                <text x="230" y="772" fill="rgba(200,230,210,0.3)" font-size="8" text-anchor="middle">Net Sec · Pen Testing · Cryptography · Cloud · AI/ML</text>
+
+                <rect x="500" y="722" width="340" height="56" rx="12" fill="rgba(0,191,165,0.07)" stroke="rgba(0,191,165,0.25)" stroke-width="1"/>
+                <text x="670" y="744" fill="#4dd0c4" font-size="12" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">BSc Information Technology</text>
+                <text x="670" y="760" fill="rgba(200,230,210,0.45)" font-size="9" text-anchor="middle">University of Mumbai · 2019–2022 · GPA 8.3</text>
+                <text x="670" y="772" fill="rgba(200,230,210,0.3)" font-size="8" text-anchor="middle">Web Dev · OOP · Networking · DBMS · Algorithms</text>
+
+                <!-- ── CERTIFICATIONS ── -->
+                <text x="450" y="812" fill="rgba(0,200,83,0.35)" font-size="8" text-anchor="middle" letter-spacing="3">// certifications</text>
+
+                <rect x="30"  y="822" width="180" height="42" rx="10" fill="rgba(0,0,0,0.35)" stroke="rgba(255,183,77,0.3)" stroke-width="1"/>
+                <text x="120" y="839" fill="#ffd54f" font-size="10" text-anchor="middle">Azure AZ-500</text>
+                <text x="120" y="855" fill="rgba(200,230,210,0.35)" font-size="8" text-anchor="middle">Cybrary · 2020</text>
+
+                <rect x="225" y="822" width="180" height="42" rx="10" fill="rgba(0,0,0,0.35)" stroke="rgba(0,191,165,0.3)" stroke-width="1"/>
+                <text x="315" y="839" fill="#4dd0c4" font-size="10" text-anchor="middle">Oracle Cloud Architect</text>
+                <text x="315" y="855" fill="rgba(200,230,210,0.35)" font-size="8" text-anchor="middle">Oracle · 2018</text>
+
+                <rect x="420" y="822" width="180" height="42" rx="10" fill="rgba(0,0,0,0.35)" stroke="rgba(239,154,154,0.3)" stroke-width="1"/>
+                <text x="510" y="839" fill="#ef9a9a" font-size="10" text-anchor="middle">TryHackMe Top 10%</text>
+                <text x="510" y="855" fill="rgba(200,230,210,0.35)" font-size="8" text-anchor="middle">Global · Ongoing</text>
+
+                <rect x="615" y="822" width="180" height="42" rx="10" fill="rgba(0,0,0,0.35)" stroke="rgba(0,200,83,0.3)" stroke-width="1"/>
+                <text x="705" y="839" fill="#69ff97" font-size="10" text-anchor="middle">Cisco Cybersecurity</text>
+                <text x="705" y="855" fill="rgba(200,230,210,0.35)" font-size="8" text-anchor="middle">Cisco · 2021</text>
+
+                <!-- ── SEEKING ── -->
+                <rect x="180" y="910" width="540" height="56" rx="14" fill="rgba(0,200,83,0.1)" stroke="rgba(0,230,118,0.4)" stroke-width="1.5" filter="url(#fg)"/>
+                <text x="450" y="934" fill="#69ff97" font-size="13" font-weight="700" text-anchor="middle" font-family="'Syne',sans-serif">Open to Work · Dublin, Ireland</text>
+                <text x="450" y="952" fill="rgba(200,230,210,0.5)" font-size="9.5" text-anchor="middle">SRE · DevOps · Cloud Engineer · Cloud Security Engineer</text>
+                <text x="450" y="964" fill="rgba(0,200,83,0.4)" font-size="8" text-anchor="middle">Immediate availability · Long-term work authorisation</text>
+
+            </svg>
+
+            <div style="text-align:center;margin-top:2rem;padding-bottom:2rem;">
+                <button id="kmap-bottom-close" style="padding:12px 36px;background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.3);border-radius:100px;color:var(--green-bright);font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:2px;cursor:none;transition:all .3s;" onmouseenter="this.style.background='rgba(0,200,83,0.15)'" onmouseleave="this.style.background='rgba(0,200,83,0.08)'">✕ Close</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
